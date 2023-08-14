@@ -1,5 +1,5 @@
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 
 from models.movie import Movie
 
@@ -12,6 +12,48 @@ from pymongo import DESCENDING, ASCENDING
 from typing import List
 
 from bson import ObjectId
+
+from fastapi.responses import HTMLResponse
+
+
+from starlette.responses import HTMLResponse
+
+html_content = """
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Page Centrée</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        button {
+            margin-top: 10px;
+            height: 50px;
+            width: 200px;
+            font-size: 20px;
+
+        }
+    </style>
+</head>
+<body>
+    <h1>Consulter la documentation de l'API avec le bouton ci-dessous</h1>
+    <button onclick="window.location.href='/docs'">Voir la documentation</button>
+</body>
+</html>
+"""
 
 
 movie = APIRouter()
@@ -43,19 +85,15 @@ def update_rank():
 
 
 
+@movie.get("/", response_class=HTMLResponse)
+async def read_root():
+    return HTMLResponse(content=html_content)
 
 
 
 #########################################Query request #########################################################################
 
 #*****************************************Tous les films **************************************************************************
-
-
-@movie.get('/')
-async def root():	
-	return {"message": "Hello World"}
-
-
 
 @movie.get('/list_movies')
 async def find_all_movies():
