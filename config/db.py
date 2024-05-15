@@ -1,16 +1,7 @@
-#from pymongo import MongoClient
-
-# MongoDB connection
-#mongo_uri = "mongodb+srv://pbps:h4OWt6yeN8rYLlkG@cluster0.tqxccre.mongodb.net/movies?retryWrites=true&w=majority"
-#mongo_uri = "mongodb+srv://pbps:h4OWt6yeN8rYLlkG@cluster0.tqxccre.mongodb.net/?retryWrites=true&w=majority"
-
-
-
-
 from pymongo import MongoClient
 
 #Lien de connexion au Cluster
-mongo_uri = "mongodb+srv://pbps:h4OWt6yeN8rYLlkG@cluster0.tqxccre.mongodb.net/?retryWrites=true&w=majority"
+mongo_uri = ""
 
 conn = MongoClient(mongo_uri)
 
